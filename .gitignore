@@ -35,3 +35,4 @@ build/
 /.mvn/
 /mvnw
 /mvnw.cmd
+/logs/spring-boot-logger-log4j2.log

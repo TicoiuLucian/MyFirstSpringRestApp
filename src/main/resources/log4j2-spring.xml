@@ -25,16 +25,16 @@
 
     <Loggers>
         <!-- LOG everything at INFO level -->
-        <Root level="DEBUG">
+        <Root level="WARN">
             <AppenderRef ref="Console"/>
             <AppenderRef ref="RollingFile"/>
         </Root>
 
         <!-- LOG "com.baeldung*" at TRACE level -->
-        <Logger name="com.baeldung" level="INFO"/>
+        <Logger name="com.baeldung" level="WARN"/>
 
         <!-- Log everything in hibernate -->
-        <Logger name="org.hibernate" level="INFO" additivity="false">
+        <Logger name="org.hibernate" level="WARN" additivity="false">
             <AppenderRef ref="Console"/>
         </Logger>
 

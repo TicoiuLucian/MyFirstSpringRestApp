@@ -2,7 +2,9 @@ package com.example.demo.rest;
 
 import com.example.demo.CarService;
 import com.example.demo.entity.Car;
+import com.example.demo.mapper.CarMapper;
 import com.example.demo.repository.CarRepository;
+import com.example.demo.rest.model.CarDTO;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,9 @@ public class MyFirstRestController {
     @Autowired
     CarService carService;
 
+    @Autowired
+    CarMapper carMapper;
+
     @GetMapping("/get-cars")
     public ResponseEntity<Iterable<Car>> getCars() {
         logger.info("Getting all cars");
@@ -36,9 +41,9 @@ public class MyFirstRestController {
     }
 
     @GetMapping("/get-car/{id}")
-    public ResponseEntity<Car> getCarById(@PathVariable Long id) {
+    public ResponseEntity<CarDTO> getCarById(@PathVariable Long id) {
         final Optional<Car> optionalCar = carRepository.findById(id);
-        return optionalCar.map(car -> new ResponseEntity<>(car, HttpStatus.OK))
+        return optionalCar.map(car -> new ResponseEntity<>(carMapper.fromEntityToDto(car), HttpStatus.OK))
                 .orElseGet(() -> new ResponseEntity<>(HttpStatus.BAD_REQUEST));
     }
 
